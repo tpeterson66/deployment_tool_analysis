@@ -114,10 +114,10 @@ resource "azurerm_linux_virtual_machine" "webvm" {
     source      = "./startup.sh"
     destination = "./startup.sh"
     connection {
-      type     = "ssh"
-      user     = "adminuser"
+      type        = "ssh"
+      user        = "adminuser"
       private_key = file("/mnt/workspace/spacelift")
-      host     = azurerm_public_ip.apppip[count.index].ip_address
+      host        = azurerm_public_ip.apppip[count.index].ip_address
     }
   }
 
@@ -127,10 +127,10 @@ resource "azurerm_linux_virtual_machine" "webvm" {
       "./startup.sh",
     ]
     connection {
-      type     = "ssh"
-      user     = "adminuser"
+      type        = "ssh"
+      user        = "adminuser"
       private_key = file("/mnt/workspace/spacelift")
-      host     = azurerm_public_ip.apppip[count.index].ip_address
+      host        = azurerm_public_ip.apppip[count.index].ip_address
     }
   }
 }
@@ -164,8 +164,8 @@ resource "azurerm_lb" "tf_lab_lb" {
 
 resource "azurerm_lb_backend_address_pool" "backend_pool" {
   # resource_group_name = azurerm_resource_group.apprg.name
-  loadbalancer_id     = azurerm_lb.tf_lab_lb.id
-  name                = "backend_pool"
+  loadbalancer_id = azurerm_lb.tf_lab_lb.id
+  name            = "backend_pool"
 }
 
 resource "azurerm_lb_rule" "lb-rule" {
@@ -176,21 +176,21 @@ resource "azurerm_lb_rule" "lb-rule" {
   frontend_port                  = 80
   backend_port                   = 80
   frontend_ip_configuration_name = "lb-pip"
-  backend_address_pool_ids        = [azurerm_lb_backend_address_pool.backend_pool.id]
+  backend_address_pool_ids       = [azurerm_lb_backend_address_pool.backend_pool.id]
   probe_id                       = azurerm_lb_probe.health_probe.id
 }
 
 resource "azurerm_network_interface_backend_address_pool_association" "backend_pool" {
-  count = var.server_count
+  count                   = var.server_count
   network_interface_id    = azurerm_network_interface.nic[count.index].id
   ip_configuration_name   = "ipconfig"
   backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool.id
 }
 resource "azurerm_lb_probe" "health_probe" {
   # resource_group_name = azurerm_resource_group.apprg.name
-  loadbalancer_id     = azurerm_lb.tf_lab_lb.id
-  name                = "http-running-probe"
-  port                = 80
+  loadbalancer_id = azurerm_lb.tf_lab_lb.id
+  name            = "http-running-probe"
+  port            = 80
 }
 output "Load_Balencer_IP_Address" {
   value = azurerm_public_ip.lb_pip.ip_address
