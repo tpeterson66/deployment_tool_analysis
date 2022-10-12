@@ -7,6 +7,7 @@ variable "server_count" {
 }
 variable "name" {}
 # variable "tags" {}
+variable "private_key" {}
 
 resource "azurerm_resource_group" "apprg" {
   name     = "${var.name}-rg"
@@ -95,7 +96,7 @@ resource "azurerm_linux_virtual_machine" "webvm" {
 
   admin_ssh_key {
     username   = "adminuser"
-    public_key = file("~/.ssh/id_rsa.pub")
+    public_key = file("./id_rsa.pub")
   }
 
   os_disk {
@@ -116,7 +117,7 @@ resource "azurerm_linux_virtual_machine" "webvm" {
     connection {
       type     = "ssh"
       user     = "adminuser"
-      private_key = file("~/.ssh/id_rsa")
+      private_key = file("/mnt/workspace/spacelift")
       host     = azurerm_public_ip.apppip[count.index].ip_address
     }
   }
@@ -129,7 +130,7 @@ resource "azurerm_linux_virtual_machine" "webvm" {
     connection {
       type     = "ssh"
       user     = "adminuser"
-      private_key = file("~/.ssh/id_rsa")
+      private_key = file("/mnt/workspace/spacelift")
       host     = azurerm_public_ip.apppip[count.index].ip_address
     }
   }
@@ -169,14 +170,14 @@ resource "azurerm_lb_backend_address_pool" "backend_pool" {
 }
 
 resource "azurerm_lb_rule" "lb-rule" {
-  resource_group_name            = azurerm_resource_group.apprg.name
+  # resource_group_name            = azurerm_resource_group.apprg.name
   loadbalancer_id                = azurerm_lb.tf_lab_lb.id
   name                           = "rule-01"
   protocol                       = "Tcp"
   frontend_port                  = 80
   backend_port                   = 80
   frontend_ip_configuration_name = "lb-pip"
-  backend_address_pool_id        = azurerm_lb_backend_address_pool.backend_pool.id
+  backend_address_pool_ids        = [azurerm_lb_backend_address_pool.backend_pool.id]
   probe_id                       = azurerm_lb_probe.health_probe.id
 }
 
