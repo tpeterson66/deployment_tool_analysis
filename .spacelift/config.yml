@@ -1,7 +1,7 @@
 version: "1"
 
 stack_defaults:
-    runner_image: public.ecr.aws/spacelift/runner-terraform
+    runner_image: public.ecr.aws/spacelift/runner-terraform:latest
     # Note that tflint is not installed by
     # default - this example assumes that your
     # runner image has this available.
