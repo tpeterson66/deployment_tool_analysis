@@ -6,4 +6,5 @@ stack_defaults:
     # default - this example assumes that your
     # runner image has this available.
     after_init:
+      - terraform fmt --check
       - terraform --version
