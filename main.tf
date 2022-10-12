@@ -7,7 +7,6 @@ variable "server_count" {
 }
 variable "name" {}
 # variable "tags" {}
-variable "private_key" {}
 
 resource "azurerm_resource_group" "apprg" {
   name     = "${var.name}-rg"
