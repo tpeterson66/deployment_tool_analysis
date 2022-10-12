@@ -163,7 +163,7 @@ resource "azurerm_lb" "tf_lab_lb" {
 }
 
 resource "azurerm_lb_backend_address_pool" "backend_pool" {
-  resource_group_name = azurerm_resource_group.apprg.name
+  # resource_group_name = azurerm_resource_group.apprg.name
   loadbalancer_id     = azurerm_lb.tf_lab_lb.id
   name                = "backend_pool"
 }
@@ -187,7 +187,7 @@ resource "azurerm_network_interface_backend_address_pool_association" "backend_p
   backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool.id
 }
 resource "azurerm_lb_probe" "health_probe" {
-  resource_group_name = azurerm_resource_group.apprg.name
+  # resource_group_name = azurerm_resource_group.apprg.name
   loadbalancer_id     = azurerm_lb.tf_lab_lb.id
   name                = "http-running-probe"
   port                = 80
