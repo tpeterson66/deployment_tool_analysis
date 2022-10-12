@@ -5,5 +5,5 @@ stack_defaults:
     # Note that tflint is not installed by
     # default - this example assumes that your
     # runner image has this available.
-    before_init:
+    after_init:
         - terraform fmt -check
