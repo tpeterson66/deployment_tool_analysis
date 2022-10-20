@@ -110,29 +110,29 @@ resource "azurerm_linux_virtual_machine" "webvm" {
     version   = "latest"
   }
 
-  # provisioner "file" {
-  #   source      = "./startup.sh"
-  #   destination = "./startup.sh"
-  #   connection {
-  #     type        = "ssh"
-  #     user        = "adminuser"
-  #     private_key = file("/mnt/workspace/spacelift")
-  #     host        = azurerm_public_ip.apppip[count.index].ip_address
-  #   }
-  # }
+  provisioner "file" {
+    source      = "./startup.sh"
+    destination = "./startup.sh"
+    connection {
+      type        = "ssh"
+      user        = "adminuser"
+      private_key = file("/mnt/workspace/spacelift")
+      host        = azurerm_public_ip.apppip[count.index].ip_address
+    }
+  }
 
-  # provisioner "remote-exec" {
-  #   inline = [
-  #     "chmod +x ./startup.sh",
-  #     "./startup.sh",
-  #   ]
-  #   connection {
-  #     type        = "ssh"
-  #     user        = "adminuser"
-  #     private_key = file("/mnt/workspace/spacelift")
-  #     host        = azurerm_public_ip.apppip[count.index].ip_address
-  #   }
-  # }
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x ./startup.sh",
+      "./startup.sh",
+    ]
+    connection {
+      type        = "ssh"
+      user        = "adminuser"
+      private_key = file("/mnt/workspace/spacelift")
+      host        = azurerm_public_ip.apppip[count.index].ip_address
+    }
+  }
 }
 resource "azurerm_availability_set" "aset" {
   name                = "tf-aset"
