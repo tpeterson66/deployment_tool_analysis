@@ -8,10 +8,10 @@ variable "server_count" {
 variable "name" {}
 # variable "tags" {}
 
-resource "azurerm_resource_group" "apprg" {
-  name     = "${var.name}-rg"
-  location = "Central US"
-}
+# resource "azurerm_resource_group" "apprg" {
+#   name     = "${var.name}-rg"
+#   location = "Central US"
+# }
 resource "azurerm_virtual_network" "network" {
   name                = "${var.name}-vnet"
   address_space       = ["10.255.240.0/23"]
