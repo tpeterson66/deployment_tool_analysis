@@ -1,3 +1,4 @@
+# The configuration for the lab env.
 provider "azurerm" {
   features {}
 }
