@@ -18,6 +18,7 @@ There are a few items that we need to evaluate to ensure we can use these tools 
 6. We need the ability to run private nodes to support on-prem deployments and deployments behind private endpoint.
 7. Need to be able to provide a list of users that can approve the deployment, policies around who/when/what can be applied
 8. Infracost built in - track the cost increase for each environment based on changes. Track the environment after the deployment to true that up (this is a third-party product which will require a license outside the free tier)
+9. Some level of drift detection, notification or alert if drift is detected.
 
 ## Wish List
 
