@@ -25,6 +25,9 @@ There are a few items that we need to evaluate to ensure we can use these tools 
 1. The ability to deploy certain environments only off of tags
 2. Notifications and interaction with Teams/Slack
 3. It would be nice to run the local code against the running environment without having to do a commit and wait for a plan to get feedback. Ideally, that would mean that users would not even need TF running on their machine
+4. I think we need some level of dependency based deployments, essentially, one team responsible for the deployment of core networking, however, the outputs of the hub firewall IP being available to other downstream consumers...
+5. Support for multi-tenant, essentially I want one account that can have access to multiple customer environments that we manage. Ideally, manage this with some policy engine as well.
+
 
 ## The Test Case
 
@@ -33,6 +36,7 @@ Run through all of the tools and test a deployment from this repo. Here are a fe
 1. You're going to need a service pricinipal for all of these tools (except one, one makes the app registration for you).
 2. One of the tools allows you to pass a file to the deployment, so, you can uncomment the provisioner and add your SSH keys if you want
 3. All the free tiers can be used to test the product. We're working on getting a paid trial for each tool for 14 days.
+4. Mess around with some of the other options as well, including deploying resources to K8s clusters or ansible playbooks against VMs or workloads.
 
 ## Additional Comments
 
