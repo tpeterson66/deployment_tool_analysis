@@ -24,6 +24,7 @@ There are a few items that we need to evaluate to ensure we can use these tools 
 
 1. The ability to deploy certain environments only off of tags
 2. Notifications and interaction with Teams/Slack
+3. It would be nice to run the local code against the running environment without having to do a commit and wait for a plan to get feedback. Ideally, that would mean that users would not even need TF running on their machine
 
 ## The Test Case
 
